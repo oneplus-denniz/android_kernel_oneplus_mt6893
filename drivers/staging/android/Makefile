@@ -9,6 +9,3 @@ obj-$(CONFIG_ANDROID_INTF_ALARM_DEV)	+= alarm-dev.o
 obj-$(CONFIG_OPLUS_HANS) += hans.o
 obj-$(CONFIG_OPLUS_HANS) += hans_netfilter.o
 #endif /*OPLUS_FEATURE_HANS_FREEZE*/
-
-#add foreground process opt support
-obj-n   += oplus_ion/

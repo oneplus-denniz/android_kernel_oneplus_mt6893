@@ -51,10 +51,6 @@ bool oplus_display_aod_support; /* if aod feature is supported */
 bool oplus_display_aod_ramless_support; /* if ramless aod feature is supported */
 bool oplus_display_aodlight_support; /* if aod light mode( high-light or low-light) option is supported */
 #endif
-#ifdef OPLUS_FEATURE_MULTIBITS_BL
-bool oplus_display_tenbits_support;
-bool oplus_display_elevenbits_support;
-#endif /* OPLUS_FEATURE_MULTIBITS_BL */
 bool oplus_display_backlight_ic_support; /* if backlight ic like lm3697 or ktd3136 is supported */
 #if 0
 bool oplus_display_lcm_id_check_support; /* whether lcm id is needed to be checked or not(only himax ic of 18311&18011 for now) */
@@ -96,10 +92,6 @@ int oplus_mtkfb_custom_data_init(struct platform_device *pdev)
 		return -1;
 	}
 
-	#ifdef OPLUS_FEATURE_MULTIBITS_BL
-	oplus_display_tenbits_support = of_property_read_bool(pdev->dev.of_node, "oplus_display_tenbits_support");
-	oplus_display_elevenbits_support = of_property_read_bool(pdev->dev.of_node, "oplus_display_elevenbits_support");
-	#endif /* OPLUS_FEATURE_MULTIBITS_BL */
 	oplus_display_backlight_ic_support = of_property_read_bool(pdev->dev.of_node, "oplus_display_backlight_ic_support");
 
 	return of_ret;

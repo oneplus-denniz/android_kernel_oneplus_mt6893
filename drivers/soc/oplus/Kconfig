@@ -1,19 +1,13 @@
-#ifdef OPLUS_FEATURE_TP_BASIC
+menu "Oplus SoC drivers"
+
 config OPLUS_ARCH_FILE
     bool "for build directory oplus"
     default y
     ---help---
     say Y to buid in
 
+source "drivers/soc/oplus/device_info/Kconfig"
+source "drivers/soc/oplus/midas/Kconfig"
+source "drivers/soc/oplus/system/Kconfig"
 
-
-#source "drivers/soc/oplus/oplus_hypnus/Kconfig"
-#source "drivers/soc/oplus/oplus_shutdown_detect/Kconfig"
-
-#source "drivers/soc/oplus/oplus_phoenix/Kconfig"
-#endif /* OPLUS_FEATURE_TP_BASIC */
-
-#source "drivers/soc/oplus/oplus_key_handle/Kconfig"
-
-#ifdef OPLUS_FEATURE_SENSOR_SMEM
-#endif /*OPLUS_FEATURE_SENSOR_SMEM */
+endmenu

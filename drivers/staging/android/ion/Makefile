@@ -23,6 +23,3 @@ ccflags-y += -DION_RUNTIME_DEBUGGER=1
 else
 ccflags-y += -DION_RUNTIME_DEBUGGER=0
 endif
-#ifdef OPLUS_FEATURE_HEALTHINFO
-obj-$(CONFIG_OPLUS_HEALTHINFO) 	+= oplus_ion/
-#endif /* OPLUS_FEATURE_HEALTHINFO */

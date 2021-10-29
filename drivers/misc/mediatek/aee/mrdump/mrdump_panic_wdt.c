@@ -56,16 +56,6 @@
 #define MAX_EXCEPTION_FRAME	16
 #define PRINTK_BUFFER_SIZE	512
 
-#ifdef OPLUS_FEATURE_PHOENIX
-extern int hwt_happened;
-extern void deal_fatal_err(void);
-#endif  /*OPLUS_FEATURE_PHOENIX*/
-
-#ifdef OPLUS_FEATURE_PERFORMANCE
-extern bool is_triggering_hwt;
-extern void flush_cache_on_panic(void);
-#endif  /*OPLUS_FEATURE_PERFORMANCE*/
-
 /* AEE_MTK_CPU_NUMS may not eaqual to real cpu numbers,
  * alloc buffer at initialization
  */
@@ -273,26 +263,9 @@ void aee_wdt_atf_info(unsigned int cpu, struct pt_regs *regs)
 	struct wd_api *wd_api = NULL;
 #endif
 
-#ifdef OPLUS_FEATURE_PHOENIX
-    if(!hwt_happened)
-    {
-        hwt_happened = 1;
-        deal_fatal_err();
-    }
-#endif  /*OPLUS_FEATURE_PHOENIX*/
-
 #ifdef CONFIG_OPLUS_FEATURE_PANIC_FLUSH
 	panic_flush_device_cache(2000);
 #endif
-
-#ifdef OPLUS_FEATURE_PERFORMANCE
-    if(!is_triggering_hwt)
-    {
-        is_triggering_hwt = true;
-        pr_notice("is_triggering_hwt : true\n");
-        flush_cache_on_panic();
-    }
-#endif  // OPLUS_FEATURE_PERFORMANCE
 
 	if (!cpu_possible(cpu)) {
 		aee_wdt_printf("FIQ: Watchdog time out at incorrect CPU %d ?\n",

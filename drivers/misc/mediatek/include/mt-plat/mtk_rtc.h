@@ -57,9 +57,6 @@ extern void oplus_rtc_mark_safe(void);
 extern void oplus_rtc_mark_sensor_cause_panic(void);
 extern int oplus_get_rtc_sensor_cause_panic_value(void);
 extern void oplus_clear_rtc_sensor_cause_panic(void);
-#ifdef OPLUS_FEATURE_AGINGTEST
-extern void oplus_rtc_mark_agingtest(void);
-#endif /*OPLUS_FEATURE_AGINGTEST */
 extern u16 rtc_rdwr_uart_bits(u16 *val);
 extern void rtc_bbpu_power_down(void);
 extern void rtc_read_pwron_alarm(struct rtc_wkalrm *alm);
@@ -98,9 +95,6 @@ extern bool crystal_exist_status(void);
 #define oplus_rtc_mark_sensor_cause_panic()			do {} while (0)
 #define oplus_get_rtc_sensor_cause_panic_value()		do {} while (0)
 #define oplus_clear_rtc_sensor_cause_panic()			do {} while (0)
-#ifdef OPLUS_FEATURE_AGINGTEST
-#define oplus_rtc_mark_agingtest()    do {} while (0)
-#endif /*OPLUS_FEATURE_AGINGTEST */
 #define rtc_read_pwron_alarm(alm)	({ 0; })
 #define get_rtc_spare_fg_value()	({ 0; })
 #define set_rtc_spare_fg_value(val)	({ 0; })

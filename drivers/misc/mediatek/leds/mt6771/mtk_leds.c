@@ -883,18 +883,12 @@ void mt_mt65xx_led_set(struct led_classdev *led_cdev, enum led_brightness level)
 
 	backlight_debug_log(led_data->level, level);
 
-	#ifndef OPLUS_FEATURE_MULTIBITS_BL
 	disp_pq_notify_backlight_changed((((1 << MT_LED_INTERNAL_LEVEL_BIT_CNT)
 					    - 1) * level + 127) / 255);
-	#endif /* OPLUS_FEATURE_MULTIBITS_BL */
 #ifdef CONFIG_MTK_AAL_SUPPORT
-	#ifndef OPLUS_FEATURE_MULTIBITS_BL
 	disp_aal_notify_backlight_changed((((1 <<
 					MT_LED_INTERNAL_LEVEL_BIT_CNT)
 					    - 1) * level + 127) / 255);
-	#else /* OPLUS_FEATURE_MULTIBITS_BL */
-	disp_aal_notify_backlight_changed(level);
-	#endif /* OPLUS_FEATURE_MULTIBITS_BL */
 #else
 	if (led_data->cust.mode == MT65XX_LED_MODE_CUST_BLS_PWM)
 		mt_mt65xx_led_set_cust(&led_data->cust,

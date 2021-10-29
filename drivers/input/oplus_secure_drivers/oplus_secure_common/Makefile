@@ -1,6 +1,4 @@
-ifeq ($(CONFIG_OPLUS_SECURE_QCOM),y)
-ccflags-y += -DQCOM_PLATFORM
-else ifeq ($(CONFIG_OPLUS_SECURE_MTK),y)
+ifeq ($(CONFIG_OPLUS_SECURE_MTK),y)
 ccflags-y += -DMTK_PLATFORM
 endif
 

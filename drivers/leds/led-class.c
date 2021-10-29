@@ -44,32 +44,6 @@ enum mtk_pq_persist_property {
 #endif
 //#endif
 
-/* #ifdef OPLUS_BUG_STABILITY */
-#ifdef OPLUS_FEATURE_MULTIBITS_BL
-extern bool __attribute((weak)) oplus_display_tenbits_support;
-extern bool __attribute((weak)) oplus_display_elevenbits_support;
-
-int get_full_backlight_level()
-{
-	if(oplus_display_elevenbits_support)
-		return 2047;
-	else if(oplus_display_tenbits_support)
-		return 1023;
-	return 255;
-}
-EXPORT_SYMBOL_GPL(get_full_backlight_level);
-int get_half_backlight_level()
-{
-	if(oplus_display_elevenbits_support)
-		return 1023;
-	else if(oplus_display_tenbits_support)
-		return 511;
-	return 127;
-}
-EXPORT_SYMBOL_GPL(get_half_backlight_level);
-#endif /* OPLUS_FEATURE_MULTIBITS_BL */
-/* #endif */ /* OPLUS_BUG_STABILITY */
-
 static ssize_t brightness_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {

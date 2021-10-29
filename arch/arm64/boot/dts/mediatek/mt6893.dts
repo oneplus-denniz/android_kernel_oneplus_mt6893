@@ -2052,20 +2052,6 @@ page_owner=on loop.max_part=7";
 		dma-names = "tx", "rx";
 	};
 
-	//#ifdef OPLUS_FEATURE_POWERINFO_FTM
-	/*
-	apuart1: serial@11003000 {
-		compatible = "mediatek,mt6577-uart";
-		reg = <0 0x11003000 0 0x1000>;
-		interrupts = <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH>;
-		clocks = <&clk26m>, <&infracfg_ao INFRACFG_AO_UART1_CG>;
-		clock-names = "baud", "bus";
-		dmas = <&apdma 2
-				&apdma 3>;
-		dma-names = "tx", "rx";
-	};
-	*/
-	//#endif /*OPLUS_FEATURE_POWERINFO_FTM */
 	usb0:usb3@11200000 {
 		compatible = "mediatek,usb3";
 		reg = <0 0x11200000 0 0x10000>,

@@ -699,10 +699,6 @@ void arch_reset(char mode, const char *cmd)
 		oplus_rtc_mark_factory();
 	} else if (cmd && !strcmp(cmd, "safe")) {
 		oplus_rtc_mark_safe();
-#ifdef OPLUS_FEATURE_AGINGTEST
-	} else if (cmd && (!strcmp(cmd, "sblmemtest") || !strcmp(cmd, "usermemaging"))) {
-		oplus_rtc_mark_agingtest();
-#endif /*OPLUS_FEATURE_AGINGTEST */
 	} else {
 		reboot = WD_SW_RESET_BYPASS_PWR_KEY;
 	}

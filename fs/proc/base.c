@@ -103,21 +103,8 @@
 
 #include "../../lib/kstrtox.h"
 
-#ifdef OPLUS_FEATURE_HEALTHINFO
-#ifdef CONFIG_OPLUS_JANK_INFO
-#include <linux/healthinfo/jank_monitor.h>
-#endif
-#endif /* OPLUS_FEATURE_HEALTHINFO */
-
 extern size_t get_ion_heap_by_pid(pid_t pid);
 extern int get_gl_mem_by_pid(pid_t pid);
-
-#ifdef OPLUS_FEATURE_SCHED_ASSIST
-#define GLOBAL_SYSTEM_UID KUIDT_INIT(1000)
-#define GLOBAL_SYSTEM_GID KGIDT_INIT(1000)
-extern const struct file_operations proc_ux_state_operations;
-extern bool is_special_entry(struct dentry *dentry, const char* special_proc);
-#endif /* OPLUS_FEATURE_SCHED_ASSIST */
 
 /* NOTE:
  *	Implementing inode permission operations in /proc is almost
@@ -1934,12 +1921,6 @@ int pid_revalidate(struct dentry *dentry, unsigned int flags)
 	if (task) {
 		task_dump_owner(task, inode->i_mode, &inode->i_uid, &inode->i_gid);
 
-#ifdef OPLUS_FEATURE_SCHED_ASSIST
-		if (is_special_entry(dentry, "ux_state")) {
-			inode->i_uid = GLOBAL_SYSTEM_UID;
-			inode->i_gid = GLOBAL_SYSTEM_GID;
-		}
-#endif /* OPLUS_FEATURE_SCHED_ASSIST */
 		inode->i_mode &= ~(S_ISUID | S_ISGID);
 		security_task_to_inode(task, inode);
 		put_task_struct(task);
@@ -3079,9 +3060,6 @@ static const struct pid_entry tgid_base_stuff[] = {
 	REG("cmdline",    S_IRUGO, proc_pid_cmdline_ops),
 	ONE("stat",       S_IRUGO, proc_tgid_stat),
 	ONE("statm",      S_IRUGO, proc_pid_statm),
-#ifdef OPLUS_FEATURE_PERFORMANCE
-	ONE("statm_as",   S_IRUGO, proc_pid_statm_as),
-#endif /* OPLUS_FEATURE_PERFORMANCE */
 	REG("maps",       S_IRUGO, proc_pid_maps_operations),
 #ifdef CONFIG_NUMA
 	REG("numa_maps",  S_IRUGO, proc_pid_numa_maps_operations),
@@ -3159,13 +3137,6 @@ static const struct pid_entry tgid_base_stuff[] = {
 #ifdef CONFIG_CPU_FREQ_TIMES
 	ONE("time_in_state", 0444, proc_time_in_state_show),
 #endif
-
-#ifdef OPLUS_FEATURE_HEALTHINFO
-#ifdef CONFIG_OPLUS_JANK_INFO
-	REG("jank_info", S_IRUGO | S_IWUGO, proc_jank_trace_operations),
-#endif
-#endif /* OPLUS_FEATURE_HEALTHINFO */
-
 	REG("real_phymemory",    S_IRUGO, proc_pid_real_phymemory_ops),
 
 };
@@ -3498,9 +3469,6 @@ static const struct pid_entry tid_base_stuff[] = {
 	REG("cmdline",   S_IRUGO, proc_pid_cmdline_ops),
 	ONE("stat",      S_IRUGO, proc_tid_stat),
 	ONE("statm",     S_IRUGO, proc_pid_statm),
-#ifdef OPLUS_FEATURE_PERFORMANCE
-	ONE("statm_as",   S_IRUGO, proc_pid_statm_as),
-#endif /* OPLUS_FEATURE_PERFORMANCE */
 	REG("maps",      S_IRUGO, proc_pid_maps_operations),
 #ifdef CONFIG_PROC_CHILDREN
 	REG("children",  S_IRUGO, proc_tid_children_operations),
@@ -3579,9 +3547,6 @@ static const struct pid_entry tid_base_stuff[] = {
 #endif
 
 	REG("real_phymemory",   S_IRUGO, proc_pid_real_phymemory_ops),
-#ifdef OPLUS_FEATURE_SCHED_ASSIST
-	REG("ux_state", S_IRUGO | S_IWUGO, proc_ux_state_operations),
-#endif /* OPLUS_FEATURE_SCHED_ASSIST */
 };
 
 static int proc_tid_base_readdir(struct file *file, struct dir_context *ctx)

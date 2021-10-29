@@ -36,6 +36,4 @@ proc-$(CONFIG_PROC_PAGE_MONITOR)	+= page.o
 proc-y += devinfo.o
 #stat cpu usage on each tick.
 proc-y	+= task_cpustats.o
-#add foreground process opt support
-obj-y	+= oplus_healthinfo/
 
